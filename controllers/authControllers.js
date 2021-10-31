@@ -2,7 +2,13 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js"
 
 const handleErrors = (err) => {
-	let errors = {name: '', email: '', password: ''}
+	let errors = {name: '', email: '', password: ''};
+
+	// login endpoint errors
+	if (err.message === 'login failed') {
+		errors.email = "Incorrect email and/or password";
+		errors.password = "Incorrect email and/or password";
+	};
 
 	// duplicate email error
 	if (err.code === 11000) {
@@ -47,5 +53,20 @@ export const signup_post = async (req, res) => {
 	catch (err) {
 		const errors = handleErrors(err);
 		res.status(400).json({errors})
+	}
+}
+
+export const login_post = async (req, res) => {
+	const {password, email} = req.body;
+
+	try {
+		const user = await User.login(email, password)
+		const token = createToken(user._id);
+
+		res.cookie('JWT', token, { httpOnly: true, maxAge: maxAge * 1000 })
+		res.status(200).json({ user: user._id })
+	} catch (err) {
+		const errors = handleErrors(err);
+		res.status(404).json({errors})
 	}
 }
