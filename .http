@@ -1,0 +1,14 @@
+@PROTOCOL = http
+@HOSTNAME = localhost
+@PORT = 3000
+@HOST = {{PROTOCOL}}://{{HOSTNAME}}:{{PORT}}
+
+
+POST {{HOST}}/signup
+Content-Type: application/json
+
+{
+    "name": "Derek",
+    "email": "derek@node.js",
+    "password": "secret456"
+}
