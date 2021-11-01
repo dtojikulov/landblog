@@ -5,10 +5,10 @@ export const authenticateUser = (req, res, next) => {
 
     const token = req.cookies.JWT;
 
-    if(!token) return res.redirect('/login');
+    if(!token) return res.status(401).redirect('/login');
 
     jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
-        if(err) return res.redirect('/login')
+        if(err) return res.status(401).redirect('/login')
         else next();
     })
 }

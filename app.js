@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import blogRoutes from "./routes/blogRoutes.js";
 import {authenticateUser, getUserFromJWT} from "./middleware/authMiddleware.js"
 
 
@@ -35,9 +36,6 @@ app.get('/', (req, res) => {
 	res.render('index')
 });
 
-app.get('/blog', authenticateUser, (req, res) => {
-	res.render('blog')
-});
-
 app.use(authRoutes);
 app.use(userRoutes);
+app.use(blogRoutes);
