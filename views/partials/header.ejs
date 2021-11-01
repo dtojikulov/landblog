@@ -9,7 +9,62 @@
   <nav>
     <h1><a href="/">Land Blog</a></h1>
     <ul>
-      <li><a href="/login">Log in</a></li>
-      <li><a href="/signup" class="btn">Sign up</a></li>
+      <% if (user) { %>
+        <li>Hello, <%= user.name %></li>
+        <li><a href="#" id="burger"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></a></li>
+      <% } else { %>
+        <li><a href="/login">Log in</a></li>
+        <li><a href="/signup" class="btn">Sign up</a></li>
+      <% } %>
     </ul>
   </nav>
+  <div id="mask"></div>
+  <div id="sideMenu">
+    <ul>
+      <li>
+        <img src="/user.png" alt="Profile photo" height="32px" width="32px">
+        <% if(user) { %>
+          <%= user.name %>
+        <% } %>
+      </li>
+      <li>
+        <a href="#">My page</a>
+      </li>
+      <li>
+        <a href="/logout">Log Out</a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <script>
+    let burger = document.querySelector('#burger');
+    let sideMenu = document.querySelector('#sideMenu');
+    let mask = document.querySelector('#mask');
+    let menuState = false;
+
+    let toggleMenu = (state) => {
+      if(state) {
+        mask.style.width = '0';
+        mask.style.height = '0';
+        sideMenu.style.transform = 'translateX(100%)';
+      }
+      else {
+        mask.style.width = '100%';
+        mask.style.height = '100%';
+        sideMenu.style.transform = 'translateX(0)';
+      } 
+    }
+
+    if(burger) {
+
+      burger.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleMenu(menuState)
+      })
+    }
+
+    mask.addEventListener('click', (e) => {
+      toggleMenu(true)
+    })
+  </script>

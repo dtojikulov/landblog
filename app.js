@@ -1,6 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 import authRoutes from "./routes/authRoutes.js";
+import {authenticateUser, getUserFromJWT} from "./middleware/authMiddleware.js"
 
 
 const app = express();
@@ -8,6 +10,7 @@ const app = express();
 // Middleware
 app.use(express.static('public'));
 app.use(express.json());
+app.use(cookieParser());
 
 // View engine
 app.set('view engine', 'ejs');
@@ -25,11 +28,13 @@ app.set('view engine', 'ejs');
 	}
 })();
 
+app.get('*', getUserFromJWT);
+
 app.get('/', (req, res) => {
 	res.render('index')
 })
 
-app.get('/blog', (req, res) => {
+app.get('/blog', authenticateUser, (req, res) => {
 	res.render('blog')
 })
 
