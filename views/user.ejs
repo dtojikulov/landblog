@@ -1,0 +1,41 @@
+<%- include('partials/header.ejs') -%>
+
+<div class="user__header">
+    <img src="/user.png" alt="User photo" width="128px" height="128px">
+    <span style="font-size: 2rem;"><%= targetUser ? targetUser.name : user.name %></span>
+</div>
+
+<ul class="blogs">
+  <li class="blog">
+    <h4>NASA proposes playbook for communicating the discovery of alien life</h4>
+    <p>Imagine you’re the very first scientist to discover aliens. Maybe it’s a clear message picked up by a radio telescope or life swimming through the ocean below Europa’s icy crust, or perhaps it’s signs of microbes wriggling in harsh Martian lakes or microscopic...</p>
+    <button class="btn">Open</button>
+  </li>
+  <li class="blog">
+    <h4>Tardigrades could survive interstellar travel in extreme hibernation</h4>
+    <p>The microscopic organisms have previously survived exposure to the vacuum of space and are able to hibernate using just 0.01 per cent of their normal energy...</p>
+    <button class="btn">Open</button>
+  </li>
+  <li class="blog">
+    <h4>Proposed Centaur Mission Could Catch Comets in the Act of Formation</h4>
+    <p>A recent plan would send a Centaur mission to Jupiter’s orbit and follow a comet through formation.</p>
+    <button class="btn">Open</button>
+  </li>
+  <li class="blog">
+    <h4>Early Earth was Pummeled 10x More Than Previously Estimated</h4>
+    <p>It’s no secret that Earth was bombarded with plenty of meteors for billions of years during the solar system’s early formation. Estimates vary on how much material impacted the planet, but it had a considerable effect on the planet’s atmosphere and...</p>
+    <button class="btn">Open</button>
+  </li>
+  <li class="blog">
+    <h4>Uranus Queues Up for Opposition</h4>
+    <p>Journey to a remote planet then double back to check in on the latest stirrings of Comet 29P/Schwassmann-Wachmann before touching the finger of dawn.</p>
+    <button class="btn">Open</button>
+  </li>
+  <li class="blog">
+    <h4>Compositions of exoplanets and their stars have a surprising relationship, study reveals</h4>
+    <p>The chemical compositions of rocky planets are linked to that of their host stars, but the relationship is not as simple as previously thought – an international team of astronomers has discovered. The correlation was established by researchers led by...</p>
+    <button class="btn">Open</button>
+  </li>
+</ul>
+
+<%- include('partials/footer.ejs') -%>
