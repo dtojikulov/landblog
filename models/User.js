@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
 		minlength: [8, "Minimum password length is 8 characters"]
 	},
 	blogs: {
-		type: [String],
+		type: [mongoose.Types.ObjectId],
 	}
 })
 

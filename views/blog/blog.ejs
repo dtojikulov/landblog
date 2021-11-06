@@ -1,0 +1,17 @@
+<%- include('../partials/header') %>
+<div class="blog">
+
+    <h2 class="blog-header">
+        <%= blog.title %>
+    </h2>
+    <div class="blog-creator">
+        <img src="/user.png" alt="user image" height="64px" width="64px">
+        <span><%= blogCreator.name %></span>
+    </div>
+    <main class="blog-content">
+        <p>
+            <%= blog.body %>
+        </p>
+    </main>
+</div>
+<%- include('../partials/footer') %>

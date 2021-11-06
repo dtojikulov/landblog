@@ -13,6 +13,7 @@ const app = express();
 app.use(express.static('public'));
 app.use(express.json());
 app.use(cookieParser());
+app.use(getUserFromJWT);
 
 // View engine
 app.set('view engine', 'ejs');
@@ -30,7 +31,6 @@ app.set('view engine', 'ejs');
 	}
 })();
 
-app.get('*', getUserFromJWT);
 
 app.get('/', (req, res) => {
 	res.render('index')
