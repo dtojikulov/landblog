@@ -45,6 +45,16 @@ userSchema.statics.login = async function(email, password) {
 	throw Error("login failed")
 }
 
+// populate users blog list with blog id
+userSchema.statics.addBlog = async function(userId, blogId) {
+	let user = await this.findById(userId);
+
+	if(user){
+		user.blogs.push(blogId);
+		user = await user.save();
+		return user;
+	}
+}
 
 const User = mongoose.model('user', userSchema);
 

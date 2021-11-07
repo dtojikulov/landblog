@@ -52,7 +52,7 @@ export const blog_post = async (req, res) => {
     try {
         const blog = await Blog.create({title, snippet, body, createdBy: user._id})
 
-        
+        User.addBlog(user._id, blog._id)
         
         res.status(201).json({blog: blog._id});
     } catch (err) {
