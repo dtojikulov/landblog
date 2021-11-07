@@ -1,0 +1,67 @@
+<%- include('../partials/header') -%>
+
+<div>
+    <h1>Create Blog</h1>
+    <form class="create-blog">
+        <label for="title">Title</label>
+        <input type="text" name="title" >
+        <div class="title error"></div>
+        
+        <label for="snippet">Snippet</label>
+        <input type="text" name="snippet" >
+        <div class="snippet error"></div>
+
+        <label for="body">Body</label>
+        <textarea name="body" cols="30" rows="8" ></textarea>
+        <div class="body error"></div>
+
+        <button class="btn">Create</button>
+    </form>
+</div>
+
+<script>
+    const getErrorDiv = (field) => {
+        return document.querySelector(`.${field}.error`);
+    };
+
+    const form = document.querySelector("form");
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // reset error divs
+        getErrorDiv('title').textContent = "";
+        getErrorDiv('snippet').textContent = "";
+        getErrorDiv('body').textContent = "";
+
+        const title = form.title.value;
+        const snippet = form.snippet.value;
+        const body = form.body.value;
+        
+        try {
+            const res = await fetch('/blog', {
+                method: 'POST',
+                body: JSON.stringify({title,snippet,body}),
+                headers: { 'Content-Type': 'application/json' }
+            });
+            
+            const data = await res.json();
+            console.log(data);
+
+            if(data.errors) {
+                for (field in data.errors){
+                    getErrorDiv(field).textContent = data.errors[field];
+                }
+            }
+            if(data.blog){
+                location.assign(`/blog/${data.blog}`)
+            }
+
+        } catch (err) {
+            console.error(err)
+        }  
+
+    })
+</script>
+
+<%- include('../partials/footer') -%>
