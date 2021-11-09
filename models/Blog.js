@@ -24,7 +24,18 @@ const blogSchema = new mongoose.Schema({
 		type: [mongoose.Types.ObjectId]
 	}
 
-}, { timestamps: true })
+}, { timestamps: true });
+
+blogSchema.statics.findUsersBlogs = async function(user) {
+	let blogs = this.find({
+		'_id': { $in: user.blogs }
+	})
+
+	if(blogs) {
+		return blogs;
+	} 
+
+}
 
 const Blog = mongoose.model('blog', blogSchema)
 

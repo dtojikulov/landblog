@@ -4,10 +4,10 @@
     <h2 class="blog-header">
         <%= blog.title %>
     </h2>
-    <div class="blog-creator">
-        <img src="/user.png" alt="user image" height="64px" width="64px">
-        <span><%= blogCreator.name %></span>
-    </div>
+        <a class="blog-creator" href="/user/<%= blog.createdBy %>">
+            <img src="/user.png" alt="user image" height="64px" width="64px">
+            <span><%= blogCreator.name %></span>
+        </a>
     <main class="blog-content">
         <p>
             <%= blog.body %>
