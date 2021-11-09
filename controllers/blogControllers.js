@@ -15,8 +15,15 @@ const handleErrors = (err) => {
 	return errors;
 }
 
-export const blog_get = (req, res) => {
-    res.render('blog/allblogs');
+export const blog_get = async (req, res) => {
+    try {
+        let blogs = await Blog.find().sort({ createdAt: -1 })
+
+        res.render('blog/allblogs', { blogs });
+    } catch (err) {
+        console.log(err);
+        res.render('404');
+    }
 }
 
 export const blog_id_get = async (req, res) => {
